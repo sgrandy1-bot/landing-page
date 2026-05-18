@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZDIY-FAB | Computex 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: 'Segoe UI';
+            src: local('Segoe UI'), local('SegoeUI');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Segoe UI';
+            src: local('Segoe UI Bold'), local('SegoeUI-Bold');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        :root {
+            --accent-yellow: #ffe700;
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor for custom halo */
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-yellow);
+            border-radius: 5px;
+        }
+
+        /* Tech Background Lines */
+        .tech-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .glow-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 231, 0, 0.05) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #cursor-halo {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 231, 0, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s;
+            mix-blend-mode: screen;
+        }
+
+        #cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-yellow);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* Slide-in Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 231, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 231, 0, 0.05);
+            transform: translateY(-5px);
+        }
+
+        /* Plus Button */
+        .plus-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .plus-btn:hover {
+            background: var(--accent-yellow);
+            color: #000;
+            transform: rotate(90deg);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* HUD Elements */
+        .hud-border {
+            position: relative;
+        }
+        .hud-border::before, .hud-border::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            border: 2px solid var(--accent-yellow);
+            transition: all 0.3s ease;
+        }
+        .hud-border::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .hud-border::after { bottom: 0; right: 0; border-left: none; border-top: none; }
+        
+        /* Custom Checkbox */
+        input[type="checkbox"] {
+            appearance: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 1px solid var(--card-border);
+            border-radius: 0.25rem;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        input[type="checkbox"]:checked {
+            background-color: var(--accent-yellow);
+            border-color: var(--accent-yellow);
+        }
+        input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px; top: 1px;
+            width: 5px; height: 10px;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        /* Form Inputs */
+        .input-tech {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .input-tech:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            background: rgba(255,255,255,0.08);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#ffe700] selection:text-black">
+
+    <div class="tech-bg"></div>
+    <div class="glow-overlay"></div>
+    <div id="cursor-halo"></div>
+    <div id="cursor-dot"></div>
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center h-full py-4">
+                <img src="https://live.staticflickr.com/65535/55130141319_80ed7e8e2b_b.jpg" alt="EZDIY-FAB Logo" class="h-10 object-contain">
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-bold tracking-wider">
+                <a href="#hero" class="hover:text-[#ffe700] transition-colors">HOME</a>
+                <a href="#product-a" class="hover:text-[#ffe700] transition-colors">TS13</a>
+                <a href="#product-b" class="hover:text-[#ffe700] transition-colors">BF12</a>
+                <a href="#product-c" class="hover:text-[#ffe700] transition-colors">UNIFAS</a>
+                <a href="#category" class="hover:text-[#ffe700] transition-colors">CATEGORY</a>
+                <a href="#contact" class="hover:text-[#ffe700] transition-colors">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#ffe700]/5 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="text-center z-10 w-full max-w-[90rem] px-6 flex flex-col items-center" id="parallax-container">
+            <!-- 上下排版，放大標題 -->
+            <div class="hud-border inline-block p-8 md:p-14 mb-8" data-speed="-2">
+                <h1 class="font-bold tracking-tight text-gradient uppercase flex flex-col items-center gap-2">
+                    <span class="text-7xl md:text-9xl lg:text-[11rem] leading-none">EZDIY-FAB</span>
+                    <span class="text-4xl md:text-6xl lg:text-[5rem] text-white mt-4">COMPUTEX 2026</span>
+                </h1>
+            </div>
+            
+            <!-- 單行排版小標 -->
+            <div class="glass-card inline-block px-10 py-6 mt-8" data-speed="1.5">
+                <div class="flex flex-row flex-wrap items-center justify-center gap-6 text-lg md:text-2xl text-gray-300 font-medium">
+                    <span class="flex items-center gap-3 whitespace-nowrap">
+                        <svg class="w-6 h-6 text-[#ffe700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        LOC: Hall 2 – 1F
+                    </span>
+                    <span class="w-2 h-2 rounded-full bg-[#ffe700]"></span>
+                    <span class="flex items-center gap-3 whitespace-nowrap">
+                        <svg class="w-6 h-6 text-[#ffe700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        BOOTH: Q0606
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-a" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">TS13 ALPHA TEMP-SENSING <br/>GPU POWER ADAPTER</h2>
+                <p class="text-gray-400 tracking-widest text-sm">BUILT FOR STABLE & SAFE POWER DELIVERY</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Left Card: Dynamic height, 50px padding, rounded image -->
+                <div class="glass-card relative p-[50px] reveal flex flex-col justify-center items-center group h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('TS13 Alpha', 'The TS13 Alpha features a real-time TFT display, smart overheat alarms, and precision angle design to ensure your GPU receives stable and safe power, minimizing risks during high loads.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" alt="TS13 ALPHA" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105">
+                    </a>
+                    <div class="text-center w-full mt-auto">
+                        <h3 class="text-2xl font-bold text-[#ffe700]">TS13 ALPHA</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-8 border-b border-white/10 pb-4 inline-block">PRODUCT FEATURES</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="w-2 h-2 rounded-full bg-[#ffe700] mt-2 shadow-[0_0_10px_#ffe700]"></div>
+                            <p class="text-lg text-gray-300">Smart Monitoring for Safe Power Delivery</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-2 h-2 rounded-full bg-[#ffe700] mt-2 shadow-[0_0_10px_#ffe700]"></div>
+                            <p class="text-lg text-gray-300">Flexible Monitoring Interface</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-2 h-2 rounded-full bg-[#ffe700] mt-2 shadow-[0_0_10px_#ffe700]"></div>
+                            <p class="text-lg text-gray-300">Built-in Overheat Alarm</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-2 h-2 rounded-full bg-[#ffe700] mt-2 shadow-[0_0_10px_#ffe700]"></div>
+                            <p class="text-lg text-gray-300">Real-Time Power Insights via TFT Display</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-2 h-2 rounded-full bg-[#ffe700] mt-2 shadow-[0_0_10px_#ffe700]"></div>
+                            <p class="text-lg text-gray-300">Precision Angle Meets Power Safety</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-b" class="py-24 relative bg-black/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">BF12 ARGB ALL-IN-ONE CASE FAN</h2>
+                <p class="text-gray-400 tracking-widest text-sm">SIMPLIFIED INSTALLATION</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: 50px padding, dynamic height, rounded image -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('BF12 360MM', 'A unified 360mm frame design that eliminates cable clutter. Just one cable connects the entire unit for seamless ARGB lighting and optimal static pressure.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Single-Frame-Pressure-One-Cable-Integrated/dp/B0GDQD1P8D?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" alt="BF12 360MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 360MM</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('BF12 240MM', 'Perfect balance of performance and size. The 240mm all-in-one design provides excellent airflow with synchronized lighting through a single connection.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Single-Frame-Pressure-One-Cable-Integrated/dp/B0GDQG4CQQ?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55130132009_5af1a6fc9b_b.jpg" alt="BF12 240MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 240MM</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('BF12 120MM', 'High static pressure 120mm fan designed for radiators and tight spaces. Features our signature daisy-chain capability for zero clutter.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Pressure-Airflow-One-Cable-Integrated/dp/B0GDQFY5G2?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55130132014_dc420b352e_b.jpg" alt="BF12 120MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 120MM</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-c" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">UNIFAS ARGB PSU EXTENSION CABLE</h2>
+                <p class="text-gray-400 tracking-widest text-sm">UNIFIED CABLE, ZERO CLUTTER</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('ATX 24-PIN', 'Elevate your motherboard power delivery with stunning ARGB lighting. High-quality sleeving ensures durability and perfect bends.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Extension-Unified-Dual-Tube-Management/dp/B0GDPRBZ62?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55130081628_7d3101c844_b.jpg" alt="ATX 24-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">ATX 24-PIN</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('12V-2X6 16-PIN', 'Next-gen power standard with integrated ARGB. Safely route power to your RTX 40-series GPU while maintaining ultimate aesthetics.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-12VHPWR-Extension-Right-Angle-Standard/dp/B0GDPH6KDN?ref_=ast_sto_dp&th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55129894046_3a367d14ba_b.jpg" alt="12V-2X6 16-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">12V-2X6 16-PIN</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('PCIE 8-PIN', 'Standard PCIe power with a visual upgrade. Available in configurations to match your specific graphics card requirements.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Extension-Right-Angle-Unified-Black-STD/dp/B0GDPCKVX5?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55130130434_37bea429ed_b.jpg" alt="PCIE 8-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">PCIE 8-PIN</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="category" class="py-24 relative bg-black/50 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">PRODUCT CATEGORY</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Category 1 -->
+                <div class="glass-card p-8 reveal hover:bg-white/5">
+                    <h3 class="text-xl font-bold mb-3 text-[#ffe700]">GPU Mounting Solutions</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Flexible GPU placement, cleaner layouts, and visual upgrade options for gaming PC builds.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Vertical Mount</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">PCIe Riser</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Display Build</span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="glass-card p-8 reveal hover:bg-white/5" style="transition-delay: 100ms;">
+                    <h3 class="text-xl font-bold mb-3 text-[#ffe700]">12V-2x6 Power Solutions</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Power-related accessories for high-performance GPUs, with routing, safety awareness, and setup aesthetics in mind.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">12V-2x6</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">GPU Adapter</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Shield Series</span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="glass-card p-8 reveal hover:bg-white/5">
+                    <h3 class="text-xl font-bold mb-3 text-[#ffe700]">Cable Management & Setup Aesthetics</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Cleaner routing and visual upgrade ideas for PC builds and desktop setup environments.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Sleeved Cable</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Cable Comb</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Setup Upgrade</span>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="glass-card p-8 reveal hover:bg-white/5" style="transition-delay: 100ms;">
+                    <h3 class="text-xl font-bold mb-3 text-[#ffe700]">ARGB / Cooling Accessories</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Lighting and cooling accessories for personalized PC builds, system integrators, and DIY retailers.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">ARGB Hub</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Fans</span>
+                        <span class="px-3 py-1 rounded-full border border-white/20 text-xs bg-white/5">Cooling</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">TALK TO US</h2>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 reveal">
+                
+                <form id="priceForm" class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    
+                    <!-- Form Error/Success Messaging -->
+                    <div id="formMessage" class="hidden col-span-1 md:col-span-2 p-4 rounded-xl border mb-4 text-center"></div>
+                    <div id="requestSuccess" class="hidden col-span-1 md:col-span-2 p-4 rounded-xl border border-green-500 bg-green-500/10 text-green-400 mb-4 text-center transition-all duration-300 opacity-0 pointer-events-none">
+                        Thank you! Your request has been sent successfully.
+                    </div>
+
+                    <!-- Left: Inputs -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold mb-6 border-b border-white/10 pb-2">Price / Cooperation Request</h3>
+                        <input type="text" name="company" placeholder="Company name *" class="input-tech" required>
+                        <input type="text" name="country" placeholder="Country *" class="input-tech" required>
+                        <input type="text" name="name" placeholder="Name (Optional)" class="input-tech">
+                        <input type="email" name="email" placeholder="Email *" class="input-tech">
+                        <input type="text" name="phone" placeholder="Phone / WhatsApp" class="input-tech">
+                        <input type="text" name="line" placeholder="LINE ID (Optional)" class="input-tech">
+                        <input type="hidden" name="contactCombined" id="contactCombined">
+                    </div>
+
+                    <!-- Right: Checkboxes & Submit -->
+                    <div class="flex flex-col">
+                        <h3 class="text-xl font-bold mb-6 border-b border-white/10 pb-2">Inquiry type</h3>
+                        <div class="space-y-4 mb-8 flex-grow">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" name="interest" value="Distributor Cooperation">
+                                <span class="group-hover:text-[#ffe700] transition-colors">Distributor Cooperation</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" name="interest" value="Sample / Review Request">
+                                <span class="group-hover:text-[#ffe700] transition-colors">Sample / Review Request</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" name="interest" value="OEM / ODM Inquiry">
+                                <span class="group-hover:text-[#ffe700] transition-colors">OEM / ODM Inquiry</span>
+                            </label>
+                        </div>
+
+                        <div class="flex flex-col gap-4 mt-auto">
+                            <button type="submit" class="w-full py-4 rounded-xl bg-[#ffe700] text-black font-bold text-lg hover:bg-white transition-colors duration-300 shadow-[0_0_20px_rgba(255,231,0,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] cursor-none">
+                                SUBMIT INQUIRY
+                            </button>
+                            <a href="https://drive.google.com/file/d/1USF4X3t8as6YA9SRRIyJOaXFrdobvgZu/view" target="_blank" class="w-full py-4 rounded-xl bg-transparent border border-white/20 text-white font-bold text-lg text-center hover:bg-white/10 transition-colors duration-300 cursor-none flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                DOWNLOAD PRODUCT CATALOG
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 border-t border-white/10 text-center relative z-10 bg-black">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#ffe700] mb-4">EZDIY-FAB Core Vision</h2>
+            <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                Empowering builders with seamless innovation. We simplify the complex, unifying aesthetics and performance so you can focus on what matters: creating your ultimate masterpiece.
+            </p>
+            <button onclick="openVisionModal()" class="px-8 py-4 rounded-full bg-white/5 border border-white/20 hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 font-bold tracking-widest text-sm cursor-none mb-12">
+                DISCOVER OUR CORE VISION
+            </button>
+            <p class="text-xs text-gray-500 tracking-widest">© 2026 EZDIY-FAB. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <!-- Feature Modal -->
+    <div id="featureModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm bg-black/60 p-4">
+        <div class="glass-card p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="featureModalContent">
+            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 id="modalTitle" class="text-2xl font-bold text-[#ffe700] mb-4"></h4>
+            <p id="modalDesc" class="text-gray-300 leading-relaxed"></p>
+        </div>
+    </div>
+
+    <!-- Vision Modal -->
+    <div id="visionModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm bg-black/80 p-4">
+        <div class="glass-card p-10 max-w-2xl w-full text-center relative transform scale-95 transition-transform duration-300 border-[#ffe700]/30 shadow-[0_0_50px_rgba(255,231,0,0.1)]" id="visionModalContent">
+            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 class="text-3xl font-bold text-[#ffe700] mb-6">EZDIY-FAB Core Vision</h4>
+            <p class="text-lg text-gray-300 leading-relaxed">
+                Empowering builders with seamless innovation. We simplify the complex, unifying aesthetics and performance so you can focus on what matters: creating your ultimate masterpiece.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // --- Custom Cursor & Halo ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorHalo = document.getElementById('cursor-halo');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            
+            // Slight delay for halo for smooth effect
+            setTimeout(() => {
+                cursorHalo.style.left = e.clientX + 'px';
+                cursorHalo.style.top = e.clientY + 'px';
+            }, 50);
+        });
+
+        // Interactive hover effect for links and buttons to expand halo
+        const interactables = document.querySelectorAll('a, button, input, label, .plus-btn');
+        interactables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorHalo.style.width = '60px';
+                cursorHalo.style.height = '60px';
+                cursorHalo.style.background = 'radial-gradient(circle, rgba(255, 231, 0, 0.4) 0%, transparent 70%)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorHalo.style.width = '300px';
+                cursorHalo.style.height = '300px';
+                cursorHalo.style.background = 'radial-gradient(circle, rgba(255, 231, 0, 0.15) 0%, transparent 70%)';
+            });
+        });
+
+        // --- Scroll Animations (Intersection Observer) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Parallax Effect for Hero ---
+        const parallaxContainer = document.getElementById('parallax-container');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            const parallaxElements = parallaxContainer.querySelectorAll('[data-speed]');
+            parallaxElements.forEach(el => {
+                const speed = el.getAttribute('data-speed');
+                el.style.transform = `translate(${xAxis * speed}px, ${yAxis * speed}px)`;
+            });
+        });
+
+        // --- Modal Logic ---
+        const featureModal = document.getElementById('featureModal');
+        const featureModalContent = document.getElementById('featureModalContent');
+        const visionModal = document.getElementById('visionModal');
+        const visionModalContent = document.getElementById('visionModalContent');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+
+        function openFeatureModal(title, desc) {
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            featureModal.classList.remove('opacity-0', 'pointer-events-none');
+            featureModalContent.classList.remove('scale-95');
+            featureModalContent.classList.add('scale-100');
+        }
+
+        function openVisionModal() {
+            visionModal.classList.remove('opacity-0', 'pointer-events-none');
+            visionModalContent.classList.remove('scale-95');
+            visionModalContent.classList.add('scale-100');
+        }
+
+        function closeModals() {
+            featureModal.classList.add('opacity-0', 'pointer-events-none');
+            featureModalContent.classList.remove('scale-100');
+            featureModalContent.classList.add('scale-95');
+            
+            visionModal.classList.add('opacity-0', 'pointer-events-none');
+            visionModalContent.classList.remove('scale-100');
+            visionModalContent.classList.add('scale-95');
+        }
+
+        // Close modal on background click
+        window.onclick = function(event) {
+            if (event.target == featureModal || event.target == visionModal) {
+                closeModals();
+            }
+        }
+
+        // --- Form Submission Logic (Adapted from Prompt) ---
+        const priceForm = document.getElementById('priceForm');
+        const requestSuccess = document.getElementById('requestSuccess');
+        const formMessage = document.getElementById('formMessage');
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyq9eZMmSjWrSB0atvldP73vxh48AhanXNr_HJgDrQ1e8SCThv5h7RFTS_UIdIO6_KKBg/exec';
+
+        function showMessage(msg, isError = true) {
+            formMessage.textContent = msg;
+            formMessage.className = isError 
+                ? 'col-span-1 md:col-span-2 p-4 rounded-xl border border-red-500 bg-red-500/10 text-red-400 mb-4 text-center block'
+                : 'col-span-1 md:col-span-2 p-4 rounded-xl border border-green-500 bg-green-500/10 text-green-400 mb-4 text-center block';
+            
+            requestSuccess.classList.remove('opacity-100', 'pointer-events-auto');
+            requestSuccess.classList.add('opacity-0', 'pointer-events-none', 'hidden');
+        }
+
+        function hideMessage() {
+            formMessage.classList.add('hidden');
+        }
+
+        function sendLeadInBackground(formData) {
+            formData.append('source', 'COMPUTEX 2026 Landing Page');
+            const encodedBody = new URLSearchParams(formData).toString();
+
+            if (navigator.sendBeacon) {
+                const blob = new Blob([encodedBody], {
+                    type: 'application/x-www-form-urlencoded;charset=UTF-8'
+                });
+                navigator.sendBeacon(GOOGLE_SCRIPT_URL, blob);
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                keepalive: true,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: encodedBody
+            }).catch(function () {
+                console.warn('Background submission failed. Please contact by WhatsApp or LINE.');
+            });
+        }
+
+        function getFieldValue(name) {
+            const field = priceForm.querySelector('[name="' + name + '"]');
+            return field ? field.value.trim() : '';
+        }
+
+        function setFieldValue(name, value) {
+            const field = priceForm.querySelector('[name="' + name + '"]');
+            if (field && value) field.value = value;
+        }
+
+        function updateCombinedContact() {
+            const email = getFieldValue('email');
+            const phone = getFieldValue('phone');
+            const line = getFieldValue('line');
+
+            const contactParts = [
+                email ? 'Email: ' + email : '',
+                phone ? 'Phone/WhatsApp: ' + phone : '',
+                line ? 'LINE: ' + line : ''
+            ].filter(Boolean);
+
+            const combinedContact = contactParts.join(' | ');
+            document.getElementById('contactCombined').value = combinedContact;
+            return combinedContact;
+        }
+
+        function prefillFormFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const allowedFields = ['company', 'country', 'name', 'email', 'phone', 'line'];
+
+            allowedFields.forEach(function (fieldName) {
+                setFieldValue(fieldName, params.get(fieldName));
+            });
+
+            updateCombinedContact();
+        }
+
+        prefillFormFromUrl();
+
+        ['email', 'phone', 'line'].forEach(function (fieldName) {
+            const field = priceForm.querySelector('[name="' + fieldName + '"]');
+            if (field) field.addEventListener('input', updateCombinedContact);
+        });
+
+        priceForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            hideMessage();
+            
+            const contact = updateCombinedContact();
+            const formData = new FormData(priceForm);
+            const company = formData.get('company');
+            const country = formData.get('country');
+            const interests = formData.getAll('interest');
+
+            // Validation without using native alert()
+            if (!company || !country || !contact || interests.length === 0) {
+                showMessage('Please complete Company, Country, at least one contact method, and select at least one Inquiry Type.');
+                return;
+            }
+
+            requestSuccess.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+            requestSuccess.classList.add('opacity-100', 'pointer-events-auto');
+            requestSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            sendLeadInBackground(formData);
+            priceForm.reset();
+            updateCombinedContact();
+        });
+
+    </script>
+</body>
+</html>
