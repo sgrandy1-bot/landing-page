@@ -34,6 +34,7 @@
             cursor: none; /* Hide default cursor for custom halo */
         }
 
+        /* Custom Scrollbar in Yellow */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -45,7 +46,7 @@
             border-radius: 5px;
         }
 
-        /* Tech Background Lines */
+        /* Tech Background Grid Lines */
         .tech-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -65,6 +66,7 @@
             pointer-events: none;
         }
 
+        /* Cursor Custom Halo */
         #cursor-halo {
             position: fixed;
             width: 300px;
@@ -89,7 +91,7 @@
             z-index: 10000;
         }
 
-        /* Slide-in Animation Classes */
+        /* Slide-in & Reveal Animations */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -100,7 +102,7 @@
             transform: translateY(0);
         }
 
-        /* Glassmorphism Cards */
+        /* Premium Glassmorphism Cards */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -115,11 +117,11 @@
             transform: translateY(-5px);
         }
 
-        /* Plus Button */
+        /* Feature plus buttons */
         .plus-btn {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
             width: 32px;
             height: 32px;
             background: rgba(255, 255, 255, 0.1);
@@ -130,7 +132,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 10;
+            z-index: 20;
         }
         .plus-btn:hover {
             background: var(--accent-yellow);
@@ -138,14 +140,13 @@
             transform: rotate(90deg);
         }
 
-        /* Text Gradients */
+        /* Text Effects & HUD styling */
         .text-gradient {
             background: linear-gradient(to right, #ffffff, #a0a0a0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        /* HUD Elements */
         .hud-border {
             position: relative;
         }
@@ -186,7 +187,7 @@
             transform: rotate(45deg);
         }
         
-        /* Form Inputs */
+        /* Input design */
         .input-tech {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
@@ -201,6 +202,18 @@
             border-color: var(--accent-yellow);
             background: rgba(255,255,255,0.08);
         }
+
+        /* Brand & Modder items style */
+        .brand-item {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .brand-item:hover {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 231, 0, 0.05);
+            box-shadow: 0 0 20px rgba(255, 231, 0, 0.1);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-[#ffe700] selection:text-black">
@@ -210,18 +223,35 @@
     <div id="cursor-halo"></div>
     <div id="cursor-dot"></div>
 
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center h-full py-4">
                 <img src="https://live.staticflickr.com/65535/55130141319_80ed7e8e2b_b.jpg" alt="EZDIY-FAB Logo" class="h-10 object-contain">
             </a>
-            <div class="hidden md:flex space-x-8 text-sm font-bold tracking-wider">
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-bold tracking-wider">
                 <a href="#hero" class="hover:text-[#ffe700] transition-colors">HOME</a>
-                <a href="#product-a" class="hover:text-[#ffe700] transition-colors">TS13</a>
-                <a href="#product-b" class="hover:text-[#ffe700] transition-colors">BF12</a>
-                <a href="#product-c" class="hover:text-[#ffe700] transition-colors">UNIFAS</a>
+                
+                <!-- Dropdown Menu -->
+                <div class="relative group py-2">
+                    <button class="hover:text-[#ffe700] transition-colors flex items-center gap-1 focus:outline-none">
+                        PRODUCT
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-1 w-64 bg-[#0a0a0a]/95 border border-white/10 rounded-xl shadow-2xl py-3 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 backdrop-blur-md">
+                        <a href="#product-a" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">ALPHA</a>
+                        <a href="#product-c" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">UNIFAS CABLE</a>
+                        <a href="#product-d" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">MEMORY HEATSINK</a>
+                        <a href="#product-b" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">CASE FAN</a>
+                        <a href="#product-e" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">GPU SUPPORT</a>
+                        <a href="#product-f" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">CONNECTIVITY & CONTROL</a>
+                        <a href="#product-g" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">I/O ADAPTER</a>
+                    </div>
+                </div>
+
+                <a href="https://x.com/EzdiyF" target="_blank" class="hover:text-[#ffe700] transition-colors">PRESS RELEASE</a>
+                <a href="#partners" class="hover:text-[#ffe700] transition-colors">PARTNERS</a>
                 <a href="#category" class="hover:text-[#ffe700] transition-colors">CATEGORY</a>
-                <a href="#contact" class="hover:text-[#ffe700] transition-colors">CONTACT</a>
+                <a href="#contact" class="hover:text-[#ffe700] transition-colors">CONTACT US</a>
             </div>
         </div>
     </nav>
@@ -230,24 +260,24 @@
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#ffe700]/5 rounded-full blur-3xl pointer-events-none"></div>
         
         <div class="text-center z-10 w-full max-w-[90rem] px-6 flex flex-col items-center" id="parallax-container">
-            <!-- 上下排版，放大標題 -->
+            <!-- Adjusted Title Layout: EZDIY-FAB on top, COMPUTEX 2026 on bottom (larger and yellow) -->
             <div class="hud-border inline-block p-8 md:p-14 mb-8" data-speed="-2">
-                <h1 class="font-bold tracking-tight text-gradient uppercase flex flex-col items-center gap-2">
-                    <span class="text-7xl md:text-9xl lg:text-[11rem] leading-none">EZDIY-FAB</span>
-                    <span class="text-4xl md:text-6xl lg:text-[5rem] text-white mt-4">COMPUTEX 2026</span>
+                <h1 class="font-bold tracking-tight uppercase flex flex-col items-center gap-4">
+                    <span class="text-3xl md:text-5xl lg:text-6xl text-white tracking-widest font-bold">EZDIY-FAB</span>
+                    <span class="text-6xl md:text-8xl lg:text-[10rem] text-[#ffe700] leading-none drop-shadow-[0_0_30px_rgba(255,231,0,0.2)]">COMPUTEX 2026</span>
                 </h1>
             </div>
             
-            <!-- 單行排版小標 -->
-            <div class="glass-card inline-block px-10 py-6 mt-8" data-speed="1.5">
-                <div class="flex flex-row flex-wrap items-center justify-center gap-6 text-lg md:text-2xl text-gray-300 font-medium">
-                    <span class="flex items-center gap-3 whitespace-nowrap">
-                        <svg class="w-6 h-6 text-[#ffe700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <!-- Horizontal Tag Layout (Single-line list) -->
+            <div class="glass-card inline-block px-10 py-5 mt-4" data-speed="1.5">
+                <div class="flex flex-row flex-wrap items-center justify-center gap-6 text-sm md:text-lg text-gray-300 font-bold tracking-wider">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-[#ffe700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         LOC: Hall 2 – 1F
                     </span>
-                    <span class="w-2 h-2 rounded-full bg-[#ffe700]"></span>
-                    <span class="flex items-center gap-3 whitespace-nowrap">
-                        <svg class="w-6 h-6 text-[#ffe700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#ffe700]"></span>
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-[#ffe700]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                         BOOTH: Q0606
                     </span>
                 </div>
@@ -255,24 +285,27 @@
         </div>
     </section>
 
-    <section id="product-a" class="py-24 relative">
+    <!-- 1. 新產品展示A區 -->
+    <section id="product-a" class="py-24 relative border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">TS13 ALPHA TEMP-SENSING <br/>GPU POWER ADAPTER</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">ALPHA TS13 TEMP-SENSING <br/>GPU POWER ADAPTER</h2>
                 <p class="text-gray-400 tracking-widest text-sm">BUILT FOR STABLE & SAFE POWER DELIVERY</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Left Card: Dynamic height, 50px padding, rounded image -->
+            <!-- Set a minimum gap of 200px between card and content on desktop -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-[200px] items-center">
+                <!-- Left Card: 50px padding, dynamic height, rounded image inside -->
                 <div class="glass-card relative p-[50px] reveal flex flex-col justify-center items-center group h-auto">
-                    <button class="plus-btn" onclick="openFeatureModal('TS13 Alpha', 'The TS13 Alpha features a real-time TFT display, smart overheat alarms, and precision angle design to ensure your GPU receives stable and safe power, minimizing risks during high loads.')">
+                    <button class="plus-btn" onclick="openFeatureModal('ALPHA TS13', 'High performance angled adapter designed with dynamic screen telemetry. Real-time temperature readouts secure power flows to prevent potential connector degradation.')">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
+                    <!-- Clickable Image with rounded edge -->
                     <a href="https://live.staticflickr.com/65535/55277181563_158108a4f7_b.jpg" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
                         <img src="https://live.staticflickr.com/65535/55277181563_158108a4f7_b.jpg" alt="TS13 ALPHA" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105">
                     </a>
                     <div class="text-center w-full mt-auto">
-                        <h3 class="text-2xl font-bold text-[#ffe700]">TS13 ALPHA</h3>
+                        <h3 class="text-2xl font-bold text-[#ffe700]">ALPHA TS13</h3>
                         <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
                     </div>
                 </div>
@@ -307,60 +340,8 @@
         </div>
     </section>
 
-    <section id="product-b" class="py-24 relative bg-black/50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">BF12 ARGB ALL-IN-ONE CASE FAN</h2>
-                <p class="text-gray-400 tracking-widest text-sm">SIMPLIFIED INSTALLATION</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1: 50px padding, dynamic height, rounded image -->
-                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
-                    <button class="plus-btn" onclick="openFeatureModal('BF12 360MM', 'A unified 360mm frame design that eliminates cable clutter. Just one cable connects the entire unit for seamless ARGB lighting and optimal static pressure.')">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    </button>
-                    <a href="https://www.amazon.com/EZDIY-FAB-Single-Frame-Pressure-One-Cable-Integrated/dp/B0GDQD1P8D?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" alt="BF12 360MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
-                    </a>
-                    <div class="text-center mt-auto">
-                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 360MM</h3>
-                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
-                    <button class="plus-btn" onclick="openFeatureModal('BF12 240MM', 'Perfect balance of performance and size. The 240mm all-in-one design provides excellent airflow with synchronized lighting through a single connection.')">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    </button>
-                    <a href="https://www.amazon.com/EZDIY-FAB-Single-Frame-Pressure-One-Cable-Integrated/dp/B0GDQG4CQQ?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55130132009_5af1a6fc9b_b.jpg" alt="BF12 240MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
-                    </a>
-                    <div class="text-center mt-auto">
-                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 240MM</h3>
-                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
-                    <button class="plus-btn" onclick="openFeatureModal('BF12 120MM', 'High static pressure 120mm fan designed for radiators and tight spaces. Features our signature daisy-chain capability for zero clutter.')">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    </button>
-                    <a href="https://www.amazon.com/EZDIY-FAB-Pressure-Airflow-One-Cable-Integrated/dp/B0GDQFY5G2?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55130132014_dc420b352e_b.jpg" alt="BF12 120MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
-                    </a>
-                    <div class="text-center mt-auto">
-                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 120MM</h3>
-                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="product-c" class="py-24 relative">
+    <!-- 2. 新產品展示C區 -->
+    <section id="product-c" class="py-24 relative bg-black/40">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">UNIFAS ARGB PSU EXTENSION CABLE</h2>
@@ -370,7 +351,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
                 <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
-                    <button class="plus-btn" onclick="openFeatureModal('ATX 24-PIN', 'Elevate your motherboard power delivery with stunning ARGB lighting. High-quality sleeving ensures durability and perfect bends.')">
+                    <button class="plus-btn" onclick="openFeatureModal('ATX 24-PIN', 'High density unified sleeving. Upgrades motherboard power routes with deep, vibrant custom ARGB color lines.')">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <a href="https://www.amazon.com/EZDIY-FAB-Extension-Unified-Dual-Tube-Management/dp/B0GDPRBZ62?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
@@ -384,11 +365,11 @@
 
                 <!-- Card 2 -->
                 <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
-                    <button class="plus-btn" onclick="openFeatureModal('12V-2X6 16-PIN', 'Next-gen power standard with integrated ARGB. Safely route power to your RTX 40-series GPU while maintaining ultimate aesthetics.')">
+                    <button class="plus-btn" onclick="openFeatureModal('12V-2X6 16-PIN', 'The ultimate safety standard for next-generation hardware. Ensures absolute mechanical contact with vibrant side light piping.')">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <a href="https://www.amazon.com/EZDIY-FAB-12VHPWR-Extension-Right-Angle-Standard/dp/B0GDPH6KDN?ref_=ast_sto_dp&th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55129894046_3a367d14ba_b.jpg" alt="12V-2X6 16-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                        <img src="https://live.staticflickr.com/65535/55277344060_d33326603e_b.jpg" alt="12V-2X6 16-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
                     </a>
                     <div class="text-center mt-auto">
                         <h3 class="text-xl font-bold text-[#ffe700]">12V-2X6 16-PIN</h3>
@@ -398,7 +379,7 @@
 
                 <!-- Card 3 -->
                 <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
-                    <button class="plus-btn" onclick="openFeatureModal('PCIE 8-PIN', 'Standard PCIe power with a visual upgrade. Available in configurations to match your specific graphics card requirements.')">
+                    <button class="plus-btn" onclick="openFeatureModal('PCIE 8-PIN', 'Flexible routing for GPUs requiring legacy configuration. Offers flawless bend capabilities with uniform comb synchronization.')">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <a href="https://www.amazon.com/EZDIY-FAB-Extension-Right-Angle-Unified-Black-STD/dp/B0GDPCKVX5?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
@@ -413,6 +394,249 @@
         </div>
     </section>
 
+    <!-- 3. 新產品展示D區 -->
+    <section id="product-d" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">MEMORY HEATSINK</h2>
+                <p class="text-gray-400 tracking-widest text-sm">COOL MEMORY. STABLE PERFORMANCE</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left Card -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('RH01 MEMORY HEATSINK', 'Engineered to cool high performance DDR4 and DDR5 memory modules. Integrated ARGB diffusion for high end aesthetics.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Heatsink-Spreader-Aluminum-Lighting/dp/B0GDQFBD4P/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277484769_516d4f6bb2_b.jpg" alt="RH01 MEMORY HEATSINK" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">RH01</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE | 1Pack / 2Pack</p>
+                    </div>
+                </div>
+
+                <!-- Right Card (Split Title: RH02 on top, TURBO-COOLED on bottom) -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('RH02 TURBO-COOLED', 'Dedicated dual micro fan setup. Delivers ultimate static cooling directly above RAM modules to sustain overclock stable configurations.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Cooling-Integrated-Advanced-Lighting/dp/B0GQDVTV8Y/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277484764_1e9bcd03e6_b.jpg" alt="RH02 TURBO-COOLED" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700] leading-tight">RH02<br>TURBO-COOLED</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-2">BLACK / WHITE | 1Pack / 2Pack</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 新產品展示B區 -->
+    <section id="product-b" class="py-24 relative bg-black/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">BF12 ARGB ALL-IN-ONE CASE FAN</h2>
+                <p class="text-gray-400 tracking-widest text-sm">SIMPLIFIED INSTALLATION</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('BF12 360MM', 'Combined triple-fan frames reduce clutter dramatically. Utilizes a unified system requiring just one PWM connection block.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Single-Frame-Pressure-One-Cable-Integrated/dp/B0GDQD1P8D?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" alt="BF12 360MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 360MM</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('BF12 240MM', 'Dual-module high pressure system optimized for custom water-cooled radiators or performance AIO coolers.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Single-Frame-Pressure-One-Cable-Integrated/dp/B0GDQG4CQQ?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55130132009_5af1a6fc9b_b.jpg" alt="BF12 240MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 240MM</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('BF12 120MM', 'A high static pressure individual module. Fluid dynamic bearing configuration ensures whisper quiet ventilation.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Pressure-Airflow-One-Cable-Integrated/dp/B0GDQFY5G2?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55130132014_dc420b352e_b.jpg" alt="BF12 120MM" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">BF12 120MM</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 新產品展示E區 -->
+    <section id="product-e" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">GPU SUPPORT</h2>
+                <p class="text-gray-400 tracking-widest text-sm">BUILT TO SUPPORT. DESIGNED TO SHOWCASE.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('AH18 PCIE 5.0 GPU MOUNT', 'Ultra rugged structural build holding heavy modern cards seamlessly. Features high durability extension ribbon cable support.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <div class="w-full flex-grow flex items-center justify-center mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277668735_e8fc998d41_b.jpg" alt="AH18 PCIE 5.0 GPU MOUNT" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">AH18 PCIE 5.0 GPU MOUNT</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('AH00 PCIE 5.0 GPU MOUNT', 'Perfect spatial clearance adjustment to enable gorgeous upright configurations inside modern chassis builds.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <div class="w-full flex-grow flex items-center justify-center mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277916400_c4631d8cd6_b.jpg" alt="AH00 PCIE 5.0 GPU MOUNT" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">AH00 PCIE 5.0 GPU MOUNT</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('VH90 GPU BRACKET', 'Multi angle rotational bracket with full custom lock features. Lets builders fine-tune GPU angles for direct visual display.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-GPU-Reinforced-Adjustable-Sync-Black/dp/B0GDPP96DK/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277397183_2e9970a608_b.jpg" alt="VH90 GPU BRACKET" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">VH90 GPU BRACKET</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 新產品展示F區 -->
+    <section id="product-f" class="py-24 relative bg-black/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">CONNECTIVITY & CONTROL</h2>
+                <p class="text-gray-400 tracking-widest text-sm">CLEANER CONNECTIONS. SMARTER BUILDS</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left Card -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('FH01 FAN HUB', 'High grade magnetic utility hub to host multiple PWM fans. Simplifies clean internal cabling layout effortlessly.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <div class="w-full flex-grow flex items-center justify-center mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277916400_c4631d8cd6_b.jpg" alt="FH01 FAN HUB" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">FH01 FAN HUB</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Right Card -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('MH01 USB 2.0 HUB', 'Splits internal 9-pin USB headers. Offers active power protection for stable interface data connections.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Expansion-Integrated-Connection-Hub-Black/dp/B0GDQ6W2K3/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277655890_2086751cb6_b.jpg" alt="MH01 USB 2.0 9-PIN HUB" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">MH01 USB 2.0 9-PIN HUB</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 新產品展示G區 -->
+    <section id="product-g" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">INTERNAL L-SHAPE I/O ADAPTER</h2>
+                <p class="text-gray-400 tracking-widest text-sm">RIGHT ANGLES, RIGHT CHOICE</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto">
+                    <button class="plus-btn" onclick="openFeatureModal('MA01 TYPE-E', 'Compact 90-degree internal adapter for Type-E. Removes heavy strain from internal routing and chassis columns.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Motherboard-Converter-Supports-Black-STD/dp/B0G4MB3PW9/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277713800_2f85fcbf7c_b.jpg" alt="MA01 TYPE-E" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">MA01 TYPE-E</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 100ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('MA02 19-PIN', 'Rigid L-shape 19-pin motherboard interface adapter. Delivers seamless aesthetic transitions directly to power grids.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-L-Shape-Motherboard-Internal-Converter/dp/B0G4MGJFBX/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55276395742_a9531d07ea_b.jpg" alt="MA02 19-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">MA02 19-PIN</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card relative p-[50px] reveal group flex flex-col h-auto" style="transition-delay: 200ms;">
+                    <button class="plus-btn" onclick="openFeatureModal('MA03 19-PIN TO TYPE-E', 'Provides seamless 19-pin to modern Type-E conversions, maximizing legacy motherboard setups for modern chassis panels.')">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                    <a href="https://www.amazon.com/EZDIY-FAB-Adapter-Motherboard-Internal-Converter-Black-STD/dp/B0G4MCJFTC/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55277541539_b23b0db291_b.jpg" alt="MA03 19-PIN TO TYPE-E" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <div class="text-center mt-auto">
+                        <h3 class="text-xl font-bold text-[#ffe700]">MA03 19-PIN TO TYPE-E</h3>
+                        <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 服務內容 (Product Categories) -->
     <section id="category" class="py-24 relative bg-black/50 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -467,17 +691,17 @@
         </div>
     </section>
 
+    <!-- 9. 聯絡表單 (CONTACT US) -->
     <section id="contact" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">TALK TO US</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">CONTACT US</h2>
             </div>
 
             <div class="glass-card p-8 md:p-12 reveal">
-                
                 <form id="priceForm" class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     
-                    <!-- Form Error/Success Messaging -->
+                    <!-- DOM Alert Area (replacing native alert window for premium UX) -->
                     <div id="formMessage" class="hidden col-span-1 md:col-span-2 p-4 rounded-xl border mb-4 text-center"></div>
                     <div id="requestSuccess" class="hidden col-span-1 md:col-span-2 p-4 rounded-xl border border-green-500 bg-green-500/10 text-green-400 mb-4 text-center transition-all duration-300 opacity-0 pointer-events-none">
                         Thank you! Your request has been sent successfully.
@@ -488,7 +712,8 @@
                         <h3 class="text-xl font-bold mb-6 border-b border-white/10 pb-2">Price / Cooperation Request</h3>
                         <input type="text" name="company" placeholder="Company name *" class="input-tech" required>
                         <input type="text" name="country" placeholder="Country *" class="input-tech" required>
-                        <input type="text" name="name" placeholder="Name (Optional)" class="input-tech">
+                        <!-- Name is now REQUIRED as instructed -->
+                        <input type="text" name="name" placeholder="Name *" class="input-tech" required>
                         <input type="email" name="email" placeholder="Email *" class="input-tech">
                         <input type="text" name="phone" placeholder="Phone / WhatsApp" class="input-tech">
                         <input type="text" name="line" placeholder="LINE ID (Optional)" class="input-tech">
@@ -511,6 +736,11 @@
                                 <input type="checkbox" name="interest" value="OEM / ODM Inquiry">
                                 <span class="group-hover:text-[#ffe700] transition-colors">OEM / ODM Inquiry</span>
                             </label>
+                            <!-- Added option: Marketing Collaboration -->
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" name="interest" value="Marketing Collaboration">
+                                <span class="group-hover:text-[#ffe700] transition-colors">Marketing Collaboration</span>
+                            </label>
                         </div>
 
                         <div class="flex flex-col gap-4 mt-auto">
@@ -528,20 +758,87 @@
         </div>
     </section>
 
-    <footer class="py-16 border-t border-white/10 text-center relative z-10 bg-black">
+    <!-- 10. 合作夥伴與 Brands 區域 -->
+    <section id="partners" class="py-24 relative bg-black/30 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Brands -->
+            <div class="mb-20">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-wider">BRANDS</h2>
+                    <div class="w-12 h-1 bg-[#ffe700] mx-auto mt-2"></div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 reveal">
+                    <a href="https://www.zotac.com/" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">ZOTAC</a>
+                    <a href="https://www.thermaltake.com/" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">THERMALTAKE</a>
+                    <a href="https://asrock.com/index.asp" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">ASROCK</a>
+                    <a href="https://www.msi.com/index.php" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">MSI</a>
+                    <a href="https://www.palit.com/" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">PALIT</a>
+                    <a href="https://www.gainward.com/main/index.php?lang=en" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">GAINWARD</a>
+                    <a href="https://www.teamgroupinc.com/en/" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">TEAMGROUP</a>
+                    <a href="https://www.gamdias.com/en" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">GAMDIAS</a>
+                    <a href="https://www.klevv.com/ken/main.php" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">KLEVV</a>
+                    <a href="https://www.xpg.com/us" target="_blank" class="brand-item glass-card py-6 flex items-center justify-center text-lg font-bold tracking-widest cursor-none">XPG</a>
+                </div>
+            </div>
+
+            <!-- PC Modders & Studios -->
+            <div>
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-wider">PC MODDERS & STUDIOS</h2>
+                    <div class="w-12 h-1 bg-[#ffe700] mx-auto mt-2"></div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto reveal">
+                    <a href="https://www.facebook.com/AKModTW/?locale=zh_TW" target="_blank" class="brand-item glass-card py-8 flex flex-col items-center justify-center cursor-none">
+                        <span class="text-xl font-bold tracking-widest text-[#ffe700]">AK MOD</span>
+                        <span class="text-xs text-gray-500 mt-1">   </span>
+                    </a>
+                    <a href="https://www.facebook.com/MSC.Studio.com.tw/" target="_blank" class="brand-item glass-card py-8 flex flex-col items-center justify-center cursor-none">
+                        <span class="text-xl font-bold tracking-widest text-[#ffe700]">MSC STUDIO</span>
+                        <span class="text-xs text-gray-500 mt-1">   </span>
+                    </a>
+                    <a href="https://www.facebook.com/Marks.Fab/?locale=zh_TW" target="_blank" class="brand-item glass-card py-8 flex flex-col items-center justify-center cursor-none">
+                        <span class="text-xl font-bold tracking-widest text-[#ffe700]">MARK'S FABRICATION</span>
+                        <span class="text-xs text-gray-500 mt-1">   </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. 頁尾與社群媒體 (Footer only, no summary/conclusion text block) -->
+    <footer class="py-20 border-t border-white/10 text-center relative z-10 bg-black">
         <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-[#ffe700] mb-4">EZDIY-FAB Core Vision</h2>
-            <p class="text-lg text-gray-300 leading-relaxed mb-8">
-                Empowering builders with seamless innovation. We simplify the complex, unifying aesthetics and performance so you can focus on what matters: creating your ultimate masterpiece.
-            </p>
-            <button onclick="openVisionModal()" class="px-8 py-4 rounded-full bg-white/5 border border-white/20 hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 font-bold tracking-widest text-sm cursor-none mb-12">
-                DISCOVER OUR CORE VISION
-            </button>
-            <p class="text-xs text-gray-500 tracking-widest">© 2026 EZDIY-FAB. ALL RIGHTS RESERVED.</p>
+            
+            <!-- Social Media Icons (SVGs for sharp premium look) -->
+            <div class="flex items-center gap-6 mb-12">
+                <!-- INSTAGRAM -->
+                <a href="https://www.instagram.com/ezdiyfab?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 cursor-none" aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <!-- FACEBOOK -->
+                <a href="https://www.facebook.com/EZDIYFAB/" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 cursor-none" aria-label="Facebook">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                </a>
+                <!-- TIKTOK -->
+                <a href="https://www.tiktok.com/@ezdiyfab" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 cursor-none" aria-label="TikTok">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.94-1.74-.22-.2-.41-.43-.58-.67-.02 2.44-.01 4.88-.01 7.32-.03 1.2-.24 2.39-.73 3.49-.94 2.24-3.21 3.86-5.67 4.11-2.51.3-5.1-.64-6.65-2.61-1.63-1.95-2.1-4.78-1.21-7.17.81-2.3 3.01-3.99 5.46-4.18.15-.01.3-.01.45-.01.01 1.34 0 2.69.01 4.03-.43.08-.87.23-1.24.49-.9.6-1.41 1.67-1.33 2.75.05 1.07.66 2.06 1.59 2.58.98.57 2.23.51 3.14-.15.9-.62 1.4-1.69 1.34-2.78.02-4.49.01-8.98.01-13.48z"/></svg>
+                </a>
+                <!-- YOUTUBE -->
+                <a href="https://www.youtube.com/channel/UCA5v8SsEhrbAT2mk34132WQ" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 cursor-none" aria-label="YouTube">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <!-- X -->
+                <a href="https://x.com/EzdiyF" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full hover:border-[#ffe700] hover:text-[#ffe700] transition-all duration-300 cursor-none" aria-label="X">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+
+            <!-- Copyright text -->
+            <p class="text-xs text-gray-500 tracking-widest mt-4">© 2026 EZDIY-FAB. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
 
-    <!-- Feature Modal -->
+    <!-- Feature Description Modal Popup -->
     <div id="featureModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm bg-black/60 p-4">
         <div class="glass-card p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="featureModalContent">
             <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-none">
@@ -552,21 +849,7 @@
         </div>
     </div>
 
-    <!-- Vision Modal -->
-    <div id="visionModal" class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm bg-black/80 p-4">
-        <div class="glass-card p-10 max-w-2xl w-full text-center relative transform scale-95 transition-transform duration-300 border-[#ffe700]/30 shadow-[0_0_50px_rgba(255,231,0,0.1)]" id="visionModalContent">
-            <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-white cursor-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <h4 class="text-3xl font-bold text-[#ffe700] mb-6">EZDIY-FAB Core Vision</h4>
-            <p class="text-lg text-gray-300 leading-relaxed">
-                Empowering builders with seamless innovation. We simplify the complex, unifying aesthetics and performance so you can focus on what matters: creating your ultimate masterpiece.
-            </p>
-        </div>
-    </div>
-
     <script>
-        // --- Custom Cursor & Halo ---
         const cursorDot = document.getElementById('cursor-dot');
         const cursorHalo = document.getElementById('cursor-halo');
         
@@ -574,15 +857,15 @@
             cursorDot.style.left = e.clientX + 'px';
             cursorDot.style.top = e.clientY + 'px';
             
-            // Slight delay for halo for smooth effect
+            // Halo lag effect for smoothness
             setTimeout(() => {
                 cursorHalo.style.left = e.clientX + 'px';
                 cursorHalo.style.top = e.clientY + 'px';
             }, 50);
         });
 
-        // Interactive hover effect for links and buttons to expand halo
-        const interactables = document.querySelectorAll('a, button, input, label, .plus-btn');
+        // Interactive hover enlarges and brightens custom cursor halo
+        const interactables = document.querySelectorAll('a, button, input, label, .plus-btn, .brand-item');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursorHalo.style.width = '60px';
@@ -596,11 +879,10 @@
             });
         });
 
-        // --- Scroll Animations (Intersection Observer) ---
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.15
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
@@ -616,7 +898,6 @@
             observer.observe(el);
         });
 
-        // --- Parallax Effect for Hero ---
         const parallaxContainer = document.getElementById('parallax-container');
         document.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
@@ -629,11 +910,8 @@
             });
         });
 
-        // --- Modal Logic ---
         const featureModal = document.getElementById('featureModal');
         const featureModalContent = document.getElementById('featureModalContent');
-        const visionModal = document.getElementById('visionModal');
-        const visionModalContent = document.getElementById('visionModalContent');
         const modalTitle = document.getElementById('modalTitle');
         const modalDesc = document.getElementById('modalDesc');
 
@@ -645,35 +923,24 @@
             featureModalContent.classList.add('scale-100');
         }
 
-        function openVisionModal() {
-            visionModal.classList.remove('opacity-0', 'pointer-events-none');
-            visionModalContent.classList.remove('scale-95');
-            visionModalContent.classList.add('scale-100');
-        }
-
         function closeModals() {
             featureModal.classList.add('opacity-0', 'pointer-events-none');
             featureModalContent.classList.remove('scale-100');
             featureModalContent.classList.add('scale-95');
-            
-            visionModal.classList.add('opacity-0', 'pointer-events-none');
-            visionModalContent.classList.remove('scale-100');
-            visionModalContent.classList.add('scale-95');
         }
 
-        // Close modal on background click
         window.onclick = function(event) {
-            if (event.target == featureModal || event.target == visionModal) {
+            if (event.target == featureModal) {
                 closeModals();
             }
         }
 
-        // --- Form Submission Logic (Adapted from Prompt) ---
         const priceForm = document.getElementById('priceForm');
         const requestSuccess = document.getElementById('requestSuccess');
         const formMessage = document.getElementById('formMessage');
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyq9eZMmSjWrSB0atvldP73vxh48AhanXNr_HJgDrQ1e8SCThv5h7RFTS_UIdIO6_KKBg/exec';
 
+        // Customized banner alert inside page bounds instead of native alert window
         function showMessage(msg, isError = true) {
             formMessage.textContent = msg;
             formMessage.className = isError 
@@ -765,14 +1032,16 @@
             const formData = new FormData(priceForm);
             const company = formData.get('company');
             const country = formData.get('country');
+            const name = formData.get('name');
             const interests = formData.getAll('interest');
 
-            // Validation without using native alert()
-            if (!company || !country || !contact || interests.length === 0) {
-                showMessage('Please complete Company, Country, at least one contact method, and select at least one Inquiry Type.');
+            // Corrected input validations conforming to mandatory requirements
+            if (!company || !country || !name || !contact || interests.length === 0) {
+                showMessage('Please fill in all required fields and select at least one inquiry type before submitting the form.');
                 return;
             }
 
+            // Slide in message block cleanly
             requestSuccess.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
             requestSuccess.classList.add('opacity-100', 'pointer-events-auto');
             requestSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -781,7 +1050,6 @@
             priceForm.reset();
             updateCombinedContact();
         });
-
     </script>
 </body>
 </html>
