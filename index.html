@@ -226,22 +226,24 @@
     <nav class="fixed top-0 left-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center h-full py-4">
-                <img src="https://sgrandy1-bot.github.io/landing-page/EZDIY-FAB LOGO.png" alt="EZDIY-FAB Logo" class="h-6 object-contain">
+                <img src="https://live.staticflickr.com/65535/55130141319_80ed7e8e2b_b.jpg" alt="EZDIY-FAB Logo" class="h-10 object-contain rounded-lg border border-white/10">
             </a>
+            
+            <!-- Desktop Navigation Menu -->
             <div class="hidden lg:flex items-center space-x-8 text-sm font-bold tracking-wider">
                 <a href="#hero" class="hover:text-[#ffe700] transition-colors">HOME</a>
                 
-                <!-- Dropdown Menu -->
+                <!-- Product Multi-level Dropdown Trigger -->
                 <div class="relative group py-2">
                     <button class="hover:text-[#ffe700] transition-colors flex items-center gap-1 focus:outline-none">
                         PRODUCT
                         <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="absolute top-full left-0 mt-1 w-64 bg-[#0a0a0a]/95 border border-white/10 rounded-xl shadow-2xl py-3 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 backdrop-blur-md">
-                        <a href="#product-a" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">ALPHA</a>
+                        <a href="#product-a" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">ALPHA (TS13)</a>
                         <a href="#product-c" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">UNIFAS CABLE</a>
                         <a href="#product-d" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">MEMORY HEATSINK</a>
-                        <a href="#product-b" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">CASE FAN</a>
+                        <a href="#product-b" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">CASE FAN (BF12)</a>
                         <a href="#product-e" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">GPU SUPPORT</a>
                         <a href="#product-f" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">CONNECTIVITY & CONTROL</a>
                         <a href="#product-g" class="block px-5 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-[#ffe700] transition-colors">I/O ADAPTER</a>
@@ -253,14 +255,44 @@
                 <a href="#category" class="hover:text-[#ffe700] transition-colors">CATEGORY</a>
                 <a href="#contact" class="hover:text-[#ffe700] transition-colors">CONTACT US</a>
             </div>
+
+            <!-- Hamburger Button for Mobile -->
+            <button id="hamburger-btn" class="lg:hidden text-white focus:outline-none cursor-none p-2" aria-label="Toggle Menu">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu overlay -->
+        <div id="mobile-menu" class="hidden lg:hidden w-full bg-[#0a0a0a]/95 border-b border-white/10 px-6 py-6 space-y-4 text-sm font-bold tracking-wider backdrop-blur-md">
+            <a href="#hero" class="block hover:text-[#ffe700] transition-colors py-2 mobile-nav-link">HOME</a>
+            
+            <div class="border-t border-white/5 pt-2">
+                <span class="text-xs text-gray-500 block mb-2 tracking-widest">PRODUCT SOLUTIONS</span>
+                <div class="grid grid-cols-2 gap-2 pl-2">
+                    <a href="#product-a" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">ALPHA</a>
+                    <a href="#product-c" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">UNIFAS CABLE</a>
+                    <a href="#product-d" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">MEMORY HEATSINK</a>
+                    <a href="#product-b" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">CASE FAN</a>
+                    <a href="#product-e" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">GPU SUPPORT</a>
+                    <a href="#product-f" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">CONNECTIVITY & CONTROL</a>
+                    <a href="#product-g" class="block hover:text-[#ffe700] transition-colors py-1.5 mobile-nav-link text-xs">I/O ADAPTER</a>
+                </div>
+            </div>
+
+            <a href="https://x.com/EzdiyF" target="_blank" class="block hover:text-[#ffe700] transition-colors py-2 border-t border-white/5 pt-4">PRESS RELEASE</a>
+            <a href="#partners" class="block hover:text-[#ffe700] transition-colors py-2 mobile-nav-link border-t border-white/5 pt-4">PARTNERS</a>
+            <a href="#category" class="block hover:text-[#ffe700] transition-colors py-2 mobile-nav-link border-t border-white/5 pt-4">CATEGORY</a>
+            <a href="#contact" class="block hover:text-[#ffe700] transition-colors py-2 mobile-nav-link border-t border-white/5 pt-4">CONTACT US</a>
         </div>
     </nav>
 
+    <!-- 1. 首屏視覺設計 -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Interactive ambient glow orb following mouse coordinate parameters -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#ffe700]/5 rounded-full blur-3xl pointer-events-none"></div>
         
         <div class="text-center z-10 w-full max-w-[90rem] px-6 flex flex-col items-center" id="parallax-container">
-            <!-- Adjusted Title Layout: EZDIY-FAB on top, COMPUTEX 2026 on bottom (larger and yellow) -->
+            <!-- Stacked Vertical Title Layout: EZDIY-FAB on top, COMPUTEX 2026 on bottom (larger and yellow) -->
             <div class="hud-border inline-block p-8 md:p-14 mb-8" data-speed="-2">
                 <h1 class="font-bold tracking-tight uppercase flex flex-col items-center gap-4">
                     <span class="text-3xl md:text-5xl lg:text-6xl text-white tracking-widest font-bold">EZDIY-FAB</span>
@@ -285,11 +317,11 @@
         </div>
     </section>
 
-    <!-- 1. 新產品展示A區 -->
+    <!-- 2. 新產品展示A區 -->
     <section id="product-a" class="py-24 relative border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">ALPHA TS13 TEMP-SENSING <br/>GPU POWER ADAPTER</h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">TS13 ALPHA TEMP-SENSING GPU POWER ADAPTER</h2>
                 <p class="text-gray-400 tracking-widest text-sm">BUILT FOR STABLE & SAFE POWER DELIVERY</p>
             </div>
 
@@ -297,15 +329,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-[200px] items-center">
                 <!-- Left Card: 50px padding, dynamic height, rounded image inside -->
                 <div class="glass-card relative p-[50px] reveal flex flex-col justify-center items-center group h-auto">
-                    <button class="plus-btn" onclick="openFeatureModal('ALPHA TS13', 'High performance angled adapter designed with dynamic screen telemetry. Real-time temperature readouts secure power flows to prevent potential connector degradation.')">
+                    <button class="plus-btn" onclick="openFeatureModal('TS13 ALPHA', 'High performance angled adapter designed with dynamic screen telemetry. Real-time temperature readouts secure power flows to prevent potential connector degradation.')">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <!-- Clickable Image with rounded edge -->
-                    <a href="https://live.staticflickr.com/65535/55277181563_158108a4f7_b.jpg" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55277181563_158108a4f7_b.jpg" alt="TS13 ALPHA" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105">
+                    <a href="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
+                        <img src="https://live.staticflickr.com/65535/55129005032_150543c396_b.jpg" alt="TS13 ALPHA" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105">
                     </a>
                     <div class="text-center w-full mt-auto">
-                        <h3 class="text-2xl font-bold text-[#ffe700]">ALPHA TS13</h3>
+                        <h3 class="text-2xl font-bold text-[#ffe700]">TS13 ALPHA</h3>
                         <p class="text-xs text-gray-500 tracking-widest mt-1">BLACK / WHITE</p>
                     </div>
                 </div>
@@ -340,7 +372,7 @@
         </div>
     </section>
 
-    <!-- 2. 新產品展示C區 -->
+    <!-- 3. 新產品展示C區 -->
     <section id="product-c" class="py-24 relative bg-black/40">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -369,7 +401,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <a href="https://www.amazon.com/EZDIY-FAB-12VHPWR-Extension-Right-Angle-Standard/dp/B0GDPH6KDN?ref_=ast_sto_dp&th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55277344060_d33326603e_b.jpg" alt="12V-2X6 16-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                        <img src="https://live.staticflickr.com/65535/55129894046_3a367d14ba_b.jpg" alt="12V-2X6 16-PIN" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
                     </a>
                     <div class="text-center mt-auto">
                         <h3 class="text-xl font-bold text-[#ffe700]">12V-2X6 16-PIN</h3>
@@ -394,7 +426,7 @@
         </div>
     </section>
 
-    <!-- 3. 新產品展示D區 -->
+    <!-- 4. 新產品展示D區 -->
     <section id="product-d" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -434,7 +466,7 @@
         </div>
     </section>
 
-    <!-- 4. 新產品展示B區 -->
+    <!-- 5. 新產品展示B區 -->
     <section id="product-b" class="py-24 relative bg-black/40">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -488,7 +520,7 @@
         </div>
     </section>
 
-    <!-- 5. 新產品展示E區 -->
+    <!-- 6. 新產品展示E區 -->
     <section id="product-e" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -517,7 +549,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <div class="w-full flex-grow flex items-center justify-center mb-8">
-                        <img src="https://live.staticflickr.com/65535/55277916400_c4631d8cd6_b.jpg" alt="AH00 PCIE 5.0 GPU MOUNT" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                        <img src="https://live.staticflickr.com/65535/55277484764_1e9bcd03e6_b.jpg" alt="AH00 PCIE 5.0 GPU MOUNT" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
                     </div>
                     <div class="text-center mt-auto">
                         <h3 class="text-xl font-bold text-[#ffe700]">AH00 PCIE 5.0 GPU MOUNT</h3>
@@ -531,7 +563,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <a href="https://www.amazon.com/EZDIY-FAB-GPU-Reinforced-Adjustable-Sync-Black/dp/B0GDPP96DK/ref=ast_sto_dp_puis?th=1" target="_blank" class="w-full flex-grow flex items-center justify-center cursor-none mb-8">
-                        <img src="https://live.staticflickr.com/65535/55277397183_2e9970a608_b.jpg" alt="VH90 GPU BRACKET" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                        <img src="https://live.staticflickr.com/65535/55273397183_2e9970a608_b.jpg" alt="VH90 GPU BRACKET" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
                     </a>
                     <div class="text-center mt-auto">
                         <h3 class="text-xl font-bold text-[#ffe700]">VH90 GPU BRACKET</h3>
@@ -542,7 +574,7 @@
         </div>
     </section>
 
-    <!-- 6. 新產品展示F區 -->
+    <!-- 7. 新產品展示F區 -->
     <section id="product-f" class="py-24 relative bg-black/40">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -557,7 +589,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     </button>
                     <div class="w-full flex-grow flex items-center justify-center mb-8">
-                        <img src="https://live.staticflickr.com/65535/55277916400_c4631d8cd6_b.jpg" alt="FH01 FAN HUB" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
+                        <img src="https://live.staticflickr.com/65535/55277484764_1e9bcd03e6_b.jpg" alt="FH01 FAN HUB" class="w-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-110">
                     </div>
                     <div class="text-center mt-auto">
                         <h3 class="text-xl font-bold text-[#ffe700]">FH01 FAN HUB</h3>
@@ -582,7 +614,7 @@
         </div>
     </section>
 
-    <!-- 7. 新產品展示G區 -->
+    <!-- 8. 新產品展示G區 -->
     <section id="product-g" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -636,7 +668,7 @@
         </div>
     </section>
 
-    <!-- 8. 服務內容 (Product Categories) -->
+    <!-- 9. 服務內容 (Product Categories) -->
     <section id="category" class="py-24 relative bg-black/50 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -691,7 +723,7 @@
         </div>
     </section>
 
-    <!-- 9. 聯絡表單 (CONTACT US) -->
+    <!-- 10. 聯絡表單 (CONTACT US) -->
     <section id="contact" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
@@ -710,7 +742,7 @@
                     <!-- Left: Inputs -->
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold mb-6 border-b border-white/10 pb-2">Price / Cooperation Request</h3>
-                        <input type="text" name="company" placeholder="Company Name *" class="input-tech" required>
+                        <input type="text" name="company" placeholder="Company name *" class="input-tech" required>
                         <input type="text" name="country" placeholder="Country *" class="input-tech" required>
                         <!-- Name is now REQUIRED as instructed -->
                         <input type="text" name="name" placeholder="Name *" class="input-tech" required>
@@ -758,7 +790,7 @@
         </div>
     </section>
 
-    <!-- 10. 合作夥伴與 Brands 區域 -->
+    <!-- 11. 合作夥伴與 Brands 區域 -->
     <section id="partners" class="py-24 relative bg-black/30 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Brands -->
@@ -790,22 +822,22 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto reveal">
                     <a href="https://www.facebook.com/AKModTW/?locale=zh_TW" target="_blank" class="brand-item glass-card py-8 flex flex-col items-center justify-center cursor-none">
                         <span class="text-xl font-bold tracking-widest text-[#ffe700]">AK MOD</span>
-                        <span class="text-xs text-gray-500 mt-1">   </span>
+                        <span class="text-xs text-gray-500 mt-1">Professional PC Studio</span>
                     </a>
                     <a href="https://www.facebook.com/MSC.Studio.com.tw/" target="_blank" class="brand-item glass-card py-8 flex flex-col items-center justify-center cursor-none">
                         <span class="text-xl font-bold tracking-widest text-[#ffe700]">MSC STUDIO</span>
-                        <span class="text-xs text-gray-500 mt-1">   </span>
+                        <span class="text-xs text-gray-500 mt-1">Custom Hardware Mods</span>
                     </a>
                     <a href="https://www.facebook.com/Marks.Fab/?locale=zh_TW" target="_blank" class="brand-item glass-card py-8 flex flex-col items-center justify-center cursor-none">
                         <span class="text-xl font-bold tracking-widest text-[#ffe700]">MARK'S FABRICATION</span>
-                        <span class="text-xs text-gray-500 mt-1">   </span>
+                        <span class="text-xs text-gray-500 mt-1">Chassis Custom Art</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 11. 頁尾與社群媒體 (Footer only, no summary/conclusion text block) -->
+    <!-- 12. 頁尾與社群媒體 -->
     <footer class="py-20 border-t border-white/10 text-center relative z-10 bg-black">
         <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
             
@@ -850,6 +882,7 @@
     </div>
 
     <script>
+        // Custom interactive cursor tracking logic
         const cursorDot = document.getElementById('cursor-dot');
         const cursorHalo = document.getElementById('cursor-halo');
         
@@ -879,6 +912,31 @@
             });
         });
 
+        // Mobile Hamburger Drawer Controller
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                hamburgerIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Close X path
+            } else {
+                mobileMenu.classList.add('hidden');
+                hamburgerIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Burger bars path
+            }
+        });
+
+        // Auto collapse mobile drawer menu when link clicked
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            });
+        });
+
+        // Smooth scroll reveal observer config
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -898,6 +956,7 @@
             observer.observe(el);
         });
 
+        // Parallax Interaction Calculations
         const parallaxContainer = document.getElementById('parallax-container');
         document.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
@@ -910,6 +969,7 @@
             });
         });
 
+        // Feature pop-up modal action handlers
         const featureModal = document.getElementById('featureModal');
         const featureModalContent = document.getElementById('featureModalContent');
         const modalTitle = document.getElementById('modalTitle');
@@ -935,6 +995,7 @@
             }
         }
 
+        // Google sheets backend parameters and submission handler
         const priceForm = document.getElementById('priceForm');
         const requestSuccess = document.getElementById('requestSuccess');
         const formMessage = document.getElementById('formMessage');
@@ -1037,7 +1098,7 @@
 
             // Corrected input validations conforming to mandatory requirements
             if (!company || !country || !name || !contact || interests.length === 0) {
-                showMessage('Please fill in all required fields and select at least one inquiry type before submitting the form.');
+                showMessage('Please complete Company, Country, Name, at least one contact method, and select at least one Inquiry Type.');
                 return;
             }
 
